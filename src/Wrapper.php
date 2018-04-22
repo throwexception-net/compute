@@ -1,8 +1,6 @@
 <?php
 
-
 namespace ThrowExceptionNet\Compute;
-
 
 use ThrowExceptionNet\Compute\Exceptions\BadMethodCallException;
 use ThrowExceptionNet\Compute\Exceptions\InvalidArgumentException;
@@ -72,9 +70,11 @@ class Wrapper
 
         try {
             if ($this->isMethod) {
-                $this->arity = (new \ReflectionMethod($this->fn[0], $this->fn[1]))->getNumberOfRequiredParameters();
-            } else if ($this->useInvoke) {
-                $this->arity = (new \ReflectionMethod(get_class($this->fn), '__invoke'))->getNumberOfRequiredParameters();
+                $this->arity = (new \ReflectionMethod($this->fn[0], $this->fn[1]))
+                    ->getNumberOfRequiredParameters();
+            } elseif ($this->useInvoke) {
+                $this->arity = (new \ReflectionMethod(get_class($this->fn), '__invoke'))
+                    ->getNumberOfRequiredParameters();
             } else {
                 $this->arity = (new \ReflectionFunction($this->fn))->getNumberOfRequiredParameters();
             }
@@ -107,7 +107,7 @@ class Wrapper
             } else {
                 $this->key = get_class($fn[0]) . '::' . $fn[1];
             }
-        } else if (is_object($fn) && !($fn instanceof \Closure)) {
+        } elseif (is_object($fn) && !($fn instanceof \Closure)) {
             $this->useInvoke = true;
             $this->key = get_class($fn);
         }
@@ -135,7 +135,9 @@ class Wrapper
         $merged = array_merge($merged, $args);
 
         return [$merged, array_reduce($merged, function ($acc, $item) use (&$hasRefArg) {
-            if ($item instanceof Ref) $hasRefArg = true;
+            if ($item instanceof Ref) {
+                $hasRefArg = true;
+            }
             return Compute::isMe($item) ? $acc : $acc + 1;
         }, 0), $hasRefArg];
     }
@@ -163,7 +165,7 @@ class Wrapper
             if ($this->isMethod) {
                 if ($this->isStatic && method_exists($fn[0], '__callStatic')) {
                     $this->useMagic = true;
-                } else if (is_object($fn[0]) && method_exists($fn[0], '__call')) {
+                } elseif (is_object($fn[0]) && method_exists($fn[0], '__call')) {
                     $this->useMagic = true;
                 }
             }

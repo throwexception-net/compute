@@ -7,4 +7,6 @@ php:
 
 install: composer install --dev
 
-script: vendor/bin/phpunit
+script:
+  - vendor/bin/phpcs --standard=ruleset.xml
+  - vendor/bin/phpunit

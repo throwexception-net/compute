@@ -1,8 +1,6 @@
 <?php
 
-
 namespace ThrowExceptionNet\Compute\Methods;
-
 
 use ThrowExceptionNet\Compute\Exceptions\InvalidArgumentException;
 use ThrowExceptionNet\Compute\Wrapper;
@@ -174,7 +172,7 @@ class MathMethods
                 if (round($val, $precision, PHP_ROUND_HALF_DOWN) == $val) {
                     return $val;
                 }
-                return round($val - (0.1 ** $precision) * 0.5 , $precision, PHP_ROUND_HALF_DOWN);
+                return round($val - (0.1 ** $precision) * 0.5, $precision, PHP_ROUND_HALF_DOWN);
         }
 
         throw new InvalidArgumentException('Argument $mode must be one of ceil|floor|half_up|half_down');

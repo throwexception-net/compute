@@ -1,10 +1,8 @@
 <?php
 
-
 namespace ThrowExceptionNet\Compute\Methods;
 
 use function ThrowExceptionNet\Compute\f;
-
 
 /**
  * Class Methods

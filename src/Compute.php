@@ -52,7 +52,9 @@ class Compute
     {
     }
 
-    protected function __clone() {}
+    protected function __clone()
+    {
+    }
 
     /**
      * @return Compute
@@ -85,7 +87,7 @@ class Compute
     public function __call($name, $args)
     {
         if (!isset($this->$name)) {
-            throw new BadMethodCallException("Method $name is non-exists");
+            throw new BadMethodCallException('Method ' . $name . ' is non-exists');
         }
         $m = $this->getMethod($name);
         return $m(...$args);
@@ -94,7 +96,7 @@ class Compute
     public function __get($name)
     {
         if (!isset($this->$name)) {
-            throw new BadMethodCallException("Method $name is non-exists");
+            throw new BadMethodCallException('Method ' . $name . ' is non-exists');
         }
         return $this->getMethod($name);
     }

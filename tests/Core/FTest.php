@@ -146,8 +146,6 @@ class FTest extends TestCase
         $this->assertEquals([1, 2, 3], $c(_(), _(), 3)->i(1, 2));
         $this->assertEquals([1, 2, 3], $c(_(), _(), 3)->i(_(), 2)->i(1));
         $this->assertEquals([1, 2, 3], $c(1, 2, _())->i(3));
-
-
     }
 
     /**

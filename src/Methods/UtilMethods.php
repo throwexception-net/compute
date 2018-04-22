@@ -1,8 +1,6 @@
 <?php
 
-
 namespace ThrowExceptionNet\Compute\Methods;
-
 
 class UtilMethods
 {
@@ -23,6 +21,5 @@ class UtilMethods
 
     public function lazy($evalFunc, ...$args)
     {
-
     }
 }

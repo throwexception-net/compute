@@ -1,8 +1,6 @@
 <?php
 
-
 namespace ThrowExceptionNet\Compute\Methods;
-
 
 class CollectionMethods
 {
@@ -10,5 +8,4 @@ class CollectionMethods
 
     const ARITY = [
     ];
-
 }

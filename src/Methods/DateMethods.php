@@ -1,8 +1,6 @@
 <?php
 
-
 namespace ThrowExceptionNet\Compute\Methods;
-
 
 class DateMethods
 {
@@ -10,5 +8,4 @@ class DateMethods
 
     const ARITY = [
     ];
-
 }

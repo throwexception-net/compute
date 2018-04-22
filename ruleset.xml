@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<ruleset name="ThrowException.net/Compute Code Standard">
+
+    <file>./</file>
+
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+
+    <exclude-pattern>*/.idea/*</exclude-pattern>
+    <rule ref="PSR2">
+        <file>./src</file>
+    </rule>
+
+
+    <rule ref="PSR1.Methods.CamelCapsMethodName.NotCamelCaps">
+        <exclude-pattern>*/tests/*</exclude-pattern>
+    </rule>
+
+</ruleset>

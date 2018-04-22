@@ -1,8 +1,6 @@
 <?php
 
-
 namespace ThrowExceptionNet\Compute\Methods;
-
 
 use ThrowExceptionNet\Compute\Wrapper;
 

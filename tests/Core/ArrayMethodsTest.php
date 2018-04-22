@@ -1,8 +1,6 @@
 <?php
 
-
-namespace Core;
-
+namespace ThrowExceptionNet\Compute\Tests\Misc;
 
 use ThrowExceptionNet\Compute\Tests\TestCase;
 use function ThrowExceptionNet\Compute\f;

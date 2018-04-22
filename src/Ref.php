@@ -1,10 +1,9 @@
 <?php
 
-
 namespace ThrowExceptionNet\Compute;
 
-
-class Ref {
+class Ref
+{
     public $val;
 
     /**

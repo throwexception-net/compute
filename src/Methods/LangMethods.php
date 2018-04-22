@@ -1,8 +1,6 @@
 <?php
 
-
 namespace ThrowExceptionNet\Compute\Methods;
-
 
 class LangMethods
 {
@@ -10,5 +8,4 @@ class LangMethods
 
     const ARITY = [
     ];
-
 }

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Core;
-
 
 use ThrowExceptionNet\Compute\Tests\TestCase;
 use function ThrowExceptionNet\Compute\f;
@@ -91,18 +89,18 @@ class MathMethodsTest extends TestCase
         $this->assertEquals(3.2, $ceil(1, 3.16));
         $this->assertEquals(3.2, $ceil(1, 3.19));
 
-        $ceiln3 = $ceil(-3);
-        $this->assertEquals(1241000, $ceiln3(1241000));
-        $this->assertEquals(1242000, $ceiln3(1241457));
-        $this->assertEquals(1242000, $ceiln3(1241557));
-        $this->assertEquals(1242000, $ceiln3(1241657));
-        $this->assertEquals(1242000, $ceiln3(1241957));
+        $ceilN3 = $ceil(-3);
+        $this->assertEquals(1241000, $ceilN3(1241000));
+        $this->assertEquals(1242000, $ceilN3(1241457));
+        $this->assertEquals(1242000, $ceilN3(1241557));
+        $this->assertEquals(1242000, $ceilN3(1241657));
+        $this->assertEquals(1242000, $ceilN3(1241957));
 
-        $this->assertEquals(-1241000, $ceiln3(-1241000));
-        $this->assertEquals(-1241000, $ceiln3(-1241457));
-        $this->assertEquals(-1241000, $ceiln3(-1241557));
-        $this->assertEquals(-1241000, $ceiln3(-1241657));
-        $this->assertEquals(-1241000, $ceiln3(-1241957));
+        $this->assertEquals(-1241000, $ceilN3(-1241000));
+        $this->assertEquals(-1241000, $ceilN3(-1241457));
+        $this->assertEquals(-1241000, $ceilN3(-1241557));
+        $this->assertEquals(-1241000, $ceilN3(-1241657));
+        $this->assertEquals(-1241000, $ceilN3(-1241957));
     }
 
     /**
@@ -131,17 +129,17 @@ class MathMethodsTest extends TestCase
         $this->assertEquals(3.1, $floor(1, 3.16));
         $this->assertEquals(3.1, $floor(1, 3.19));
 
-        $floorn3 = $floor(-3);
-        $this->assertEquals(1241000, $floorn3(1241000));
-        $this->assertEquals(1241000, $floorn3(1241457));
-        $this->assertEquals(1241000, $floorn3(1241557));
-        $this->assertEquals(1241000, $floorn3(1241657));
-        $this->assertEquals(1241000, $floorn3(1241957));
+        $floorN3 = $floor(-3);
+        $this->assertEquals(1241000, $floorN3(1241000));
+        $this->assertEquals(1241000, $floorN3(1241457));
+        $this->assertEquals(1241000, $floorN3(1241557));
+        $this->assertEquals(1241000, $floorN3(1241657));
+        $this->assertEquals(1241000, $floorN3(1241957));
 
-        $this->assertEquals(-1241000, $floorn3(-1241000));
-        $this->assertEquals(-1242000, $floorn3(-1241457));
-        $this->assertEquals(-1242000, $floorn3(-1241557));
-        $this->assertEquals(-1242000, $floorn3(-1241657));
-        $this->assertEquals(-1242000, $floorn3(-1241957));
+        $this->assertEquals(-1241000, $floorN3(-1241000));
+        $this->assertEquals(-1242000, $floorN3(-1241457));
+        $this->assertEquals(-1242000, $floorN3(-1241557));
+        $this->assertEquals(-1242000, $floorN3(-1241657));
+        $this->assertEquals(-1242000, $floorN3(-1241957));
     }
 }
