@@ -1,0 +1,32 @@
+{
+  "name": "throwexception-net/compute",
+  "description": "Simple library for dealing with data.",
+  "type": "library",
+  "require-dev": {
+    "squizlabs/php_codesniffer": "^3.2",
+    "phpunit/phpunit": "^5.7"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Revonia",
+      "email": "revonia64@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "ThrowExceptionNet\\Compute\\": "src/"
+    },
+    "files": [
+      "src/functions.php"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "ThrowExceptionNet\\Compute\\Tests\\": "tests/"
+    }
+  },
+  "require": {
+    "php": "^5.6 || ^7.0"
+  }
+}
