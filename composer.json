@@ -28,5 +28,14 @@
   },
   "require": {
     "php": "^5.6 || ^7.0"
+  },
+  "scripts": {
+    "test": "phpunit",
+    "lint": "phpcs --standard=ruleset.xml",
+    "coverage": "phpunit --coverage-clover=coverage.xml",
+    "ci": [
+      "@lint",
+      "@coverage"
+    ]
   }
 }
