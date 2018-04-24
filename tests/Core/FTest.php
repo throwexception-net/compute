@@ -2,6 +2,7 @@
 
 namespace ThrowExceptionNet\Compute\Tests\Core;
 
+use ThrowExceptionNet\Compute\Compute;
 use ThrowExceptionNet\Compute\Tests\Misc\MagicCall;
 use ThrowExceptionNet\Compute\Tests\TestCase;
 use function ThrowExceptionNet\Compute\f;
@@ -14,6 +15,16 @@ class FTest extends TestCase
     /**
      * @test
      */
+    public function compute_is_singleton()
+    {
+        $this->assertEquals(f(), f());
+        $this->assertEquals(f(), fr());
+        $this->assertEquals(f(), Compute::getInstance());
+    }
+
+    /**
+     * @test
+     */
     public function wrapper_is_callable()
     {
         $c = f(function () {
@@ -22,6 +33,8 @@ class FTest extends TestCase
 
         $this->assertTrue(is_callable($c));
         $this->assertEquals(1, $c());
+        $this->assertEquals(1, $c->i());
+        $this->assertEquals(1, $c->invoke());
     }
 
     /**
@@ -36,6 +49,21 @@ class FTest extends TestCase
         $this->assertEquals(1, $c());
     }
 
+    /**
+     * @test
+     */
+    public function bindTo_callOn_should_work()
+    {
+        $a = new MagicCall(1);
+        $b = new MagicCall(2);
+
+        $c1 = f([$a, 'getValue']);
+
+        $this->assertEquals(1, $c1());
+        $this->assertEquals(2, $c1->bindTo($b)->i());
+        $this->assertEquals(2, $c1->callOn($b));
+        $this->assertEquals(1, $c1());
+    }
 
     /**
      * @test

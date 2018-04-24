@@ -8,6 +8,7 @@ use function ThrowExceptionNet\Compute\f;
  * Class Methods
  * @package ThrowExceptionNet\Compute\Methods
  * @property array ARITY
+ * @property array ALIAS
  */
 trait MethodCollection
 {
@@ -20,6 +21,10 @@ trait MethodCollection
     {
         if (static::$instance === null) {
             static::$instance = new static();
+        }
+
+        if (defined('static::ALIAS') && isset(static::ALIAS[$name])) {
+            $name = static::ALIAS[$name];
         }
         $ARITY = static::ARITY;
 

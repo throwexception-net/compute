@@ -4,6 +4,13 @@ namespace ThrowExceptionNet\Compute\Tests\Misc;
 
 class MagicCall
 {
+    protected $value;
+
+    public function __construct($value = 1)
+    {
+        $this->value = $value;
+    }
+
     public function __call($name, $arguments)
     {
         return $name . implode(',', $arguments);
@@ -22,5 +29,13 @@ class MagicCall
     public static function staticNoMagic($a, $b, $c)
     {
         return [$a, $b, $c];
+    }
+
+    /**
+     * @return int
+     */
+    public function getValue()
+    {
+        return $this->value;
     }
 }

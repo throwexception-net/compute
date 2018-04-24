@@ -54,7 +54,7 @@ class Wrapper
     /**
      * @return int
      */
-    protected function getArity()
+    public function getArity()
     {
         if ($this->arity !== null) {
             return $this->arity;
@@ -178,7 +178,7 @@ class Wrapper
 
     /**
      * @param array ...$args
-     * @return Wrapper
+     * @return Wrapper|mixed
      */
     public function __invoke(...$args)
     {
@@ -199,17 +199,23 @@ class Wrapper
             : $fn(...$merged);
     }
 
+    /**
+     * @return Wrapper|mixed
+     */
     public function invoke()
     {
         return $this(...func_get_args());
     }
 
+    /**
+     * @return Wrapper|mixed
+     */
     public function i()
     {
         return $this(...func_get_args());
     }
 
-    public function call($newThis, ...$args)
+    public function callOn($newThis, ...$args)
     {
         $new = $this->bindTo($newThis);
         return $new(...$args);

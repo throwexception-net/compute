@@ -13,6 +13,7 @@ use ThrowExceptionNet\Compute\Wrapper;
  * @property callable $compare
  * @property callable $dec
  * @property callable $divide
+ * @property callable $inc
  * @property callable $mean
  * @property callable $median
  * @property callable $mod
@@ -30,6 +31,7 @@ class MathMethods
         'compare' => 2,
         'dec' => 1,
         'divide' => 2,
+        'inc' => 1,
         'mean' => 1,
         'median' => 1,
         'mod' => 2,
@@ -50,8 +52,8 @@ class MathMethods
     }
 
     /**
-     * @param int (required) $a
-     * @param int (required) $b
+     * @param int|string (required) $a
+     * @param int|string (required) $b
      * @return int|Wrapper -1 0 1
      */
     public function compare($a = 0, $b = 0)
@@ -69,7 +71,7 @@ class MathMethods
      * @param int|float (required) $a
      * @return int|float|Wrapper
      */
-    public function dec(&$a = 1)
+    public function dec($a = 1)
     {
         return --$a;
     }
@@ -88,7 +90,7 @@ class MathMethods
      * @param int|float (required) $a
      * @return int|float|Wrapper
      */
-    public function inc(&$a = 0)
+    public function inc($a = 0)
     {
         return ++$a;
     }
@@ -109,15 +111,19 @@ class MathMethods
     /**
      * @param array $numbers
      * @return float|int|Wrapper
+     * @throws \ThrowExceptionNet\Compute\Exceptions\InvalidArgumentException
      */
     public function median($numbers = [])
     {
+        if (empty($numbers)) {
+            throw new InvalidArgumentException('Argument $numbers should not be empty.');
+        }
         sort($numbers);
         $i = count($numbers) / 2;
         if (is_float($i)) {
             return $numbers[(int) $i];
         }
-        return ($numbers[$i] + $numbers [$i + 1]) / 2;
+        return ($numbers[$i - 1] + $numbers [$i]) / 2;
     }
 
     /**
