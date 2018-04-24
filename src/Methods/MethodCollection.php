@@ -23,11 +23,12 @@ trait MethodCollection
             static::$instance = new static();
         }
 
-        if (defined('static::ALIAS') && isset(static::ALIAS[$name])) {
+        $ALIAS = static::ALIAS;
+        if (defined('static::ALIAS') && isset($ALIAS[$name])) {
             $name = static::ALIAS[$name];
         }
-        $ARITY = static::ARITY;
 
+        $ARITY = static::ARITY;
         if (isset($ARITY[$name])) {
             return f([static::$instance, $name], static::ARITY[$name]);
         }
