@@ -16,6 +16,15 @@ class Ref
     }
 
     /**
+     * get the Ref
+     * @return array|bool|float|int|null|string
+     */
+    public function &get()
+    {
+        return $this->val;
+    }
+
+    /**
      * @param array $array
      * @return array
      */
@@ -24,7 +33,7 @@ class Ref
         $resolved = [];
         foreach ($array as $key => $item) {
             if ($item instanceof self) {
-                $resolved[$key] =& $item->val;
+                $resolved[$key] = &$item->val;
             } else {
                 $resolved[$key] = $item;
             }

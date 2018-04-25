@@ -223,6 +223,9 @@ class Wrapper
 
     public function bindTo($newThis, $newScope = 'static')
     {
+        if (version_compare(PHP_VERSION, '7.1.0', '<')) {
+            throw new BadMethodCallException('Methods bindTo or callOn requires PHP >= 7.1.0');
+        }
         $new = $this->clones();
         if ($this->useMagic) {
             throw new BadMethodCallException('Can not bind when $fn use magic __call() or __callStatic().');

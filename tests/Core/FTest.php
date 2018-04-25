@@ -51,6 +51,7 @@ class FTest extends TestCase
 
     /**
      * @test
+     * @requires PHP 7.1
      */
     public function bindTo_callOn_should_work()
     {
@@ -70,12 +71,12 @@ class FTest extends TestCase
      */
     public function wrap_ref_should_work()
     {
+        $a = 1;
+        $b = 1;
         $add = f(function (&$a, &$b, $x) {
             ++$a;
             $b += $x;
         })->i(ref($a))->i(ref($b));
-        $a = 1;
-        $b = 1;
 
         $add(2);
         $this->assertEquals(2, $a);
