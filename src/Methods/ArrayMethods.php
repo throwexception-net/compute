@@ -37,4 +37,18 @@ class ArrayMethods
         }
         return $result;
     }
+
+    public function nth($offset, $list)
+    {
+        if (!is_string($list)
+            || !is_array($list)
+            || !($list instanceof \ArrayAccess)
+        ) {
+            return null;
+        }
+        if (isset($list[$offset])) {
+            return $list[$offset];
+        }
+        return null;
+    }
 }
