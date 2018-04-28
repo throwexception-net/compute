@@ -3,6 +3,7 @@
 namespace ThrowExceptionNet\Compute\Methods;
 
 use ThrowExceptionNet\Compute\Wrapper;
+use function ThrowExceptionNet\Compute\f;
 
 /**
  * Class ArrayMethods
@@ -26,12 +27,12 @@ class ArrayMethods
     public function classify($callback = null, $array = null)
     {
         $result = [];
-        $to = function ($class, $item) use (&$result) {
+        $to = f(function ($class, $item) use (&$result) {
             if (!isset($result[$class])) {
                 $result[$class] = [];
             }
             $result[$class][] = $item;
-        };
+        }, 2);
         foreach ($array as $key => $item) {
             $callback($to, $item, $key, $result);
         }

@@ -4,12 +4,12 @@ namespace ThrowExceptionNet\Compute;
 
 use ThrowExceptionNet\Compute\Exceptions\BadMethodCallException;
 use ThrowExceptionNet\Compute\Methods\ArrayMethods;
-use ThrowExceptionNet\Compute\Methods\CollectionMethods;
 use ThrowExceptionNet\Compute\Methods\DateMethods;
 use ThrowExceptionNet\Compute\Methods\LangMethods;
 use ThrowExceptionNet\Compute\Methods\LogicMethods;
 use ThrowExceptionNet\Compute\Methods\MathMethods;
 use ThrowExceptionNet\Compute\Methods\ObjectMethods;
+use ThrowExceptionNet\Compute\Methods\RelationMethods;
 use ThrowExceptionNet\Compute\Methods\StringMethods;
 use ThrowExceptionNet\Compute\Methods\UtilMethods;
 
@@ -17,7 +17,7 @@ use ThrowExceptionNet\Compute\Methods\UtilMethods;
  * Class Placeholder
  * @package ThrowExceptionNet\Compute
  * @mixin ArrayMethods
- * @mixin CollectionMethods
+ * @mixin RelationMethods
  * @mixin LangMethods
  * @mixin StringMethods
  * @mixin LogicMethods
@@ -31,10 +31,10 @@ class Compute
 
     const METHOD_CLASSES = [
         ArrayMethods::class,
-        CollectionMethods::class,
         LangMethods::class,
         StringMethods::class,
         LogicMethods::class,
+        RelationMethods::class,
         UtilMethods::class,
         MathMethods::class,
         DateMethods::class,

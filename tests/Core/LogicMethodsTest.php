@@ -77,6 +77,5 @@ class LogicMethodsTest extends TestCase
      */
     public function both_should_work()
     {
-        
     }
 }

@@ -23,7 +23,6 @@ trait MethodCollection
             static::$instance = new static();
         }
 
-
         if (defined('static::ALIAS')) {
             $ALIAS = static::ALIAS;
             if (isset($ALIAS[$name])) {
