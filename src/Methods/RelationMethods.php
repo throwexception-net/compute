@@ -3,6 +3,7 @@
 namespace ThrowExceptionNet\Compute\Methods;
 
 use ThrowExceptionNet\Compute\Wrapper;
+use function ThrowExceptionNet\Compute\f;
 
 class RelationMethods
 {
@@ -65,7 +66,7 @@ class RelationMethods
         $diff = [];
         foreach ($list1 as $item1) {
             foreach ($list2 as $item2) {
-                if ($predicate($item1, $item2)
+                if (!$predicate($item1, $item2)
                     && !in_array($item2, $diff, true)) {
                         $diff[] = $item2;
                 }
@@ -150,5 +151,81 @@ class RelationMethods
             }
         }
         return $result;
+    }
+
+    public function intersection($list1 = [], $list2 = [])
+    {
+        $result = [];
+        foreach ($list1 as $item1) {
+            foreach ($list2 as $item2) {
+                if ($item1 === $item2
+                    && !\in_array($item2, $result, true)) {
+                    $result[] = $item2;
+                }
+            }
+        }
+        return $result;
+    }
+
+    public function lt($a = 0, $b = 0)
+    {
+        return $a < $b;
+    }
+
+    public function lte($a = 0, $b = 0)
+    {
+        return $a <= $b;
+    }
+
+    public function max($a = 0, $b = 0)
+    {
+        return $a > $b ? $a : $b;
+    }
+
+    /**
+     * @param callable $fn
+     * @param mixed $a
+     * @param mixed $b
+     * @return mixed
+     */
+    public function maxBy($fn = null, $a = 0, $b = 0)
+    {
+        $a = $fn($a);
+        $b = $fn($b);
+        return $a > $b ? $a : $b;
+    }
+
+    /**
+     * @param mixed $a
+     * @param mixed $b
+     * @return mixed
+     */
+    public function min($a = 0, $b = 0)
+    {
+        return $a < $b ? $a : $b;
+    }
+
+    /**
+     * @param callable $fn
+     * @param mixed $a
+     * @param mixed $b
+     * @return mixed
+     */
+    public function minBy($fn = null, $a = 0, $b = 0)
+    {
+        $a = $fn($a);
+        $b = $fn($b);
+        return $a < $b ? $a : $b;
+    }
+
+    /**
+     * @param array|string $indexes $indexes
+     * @param mixed $val
+     * @param mixed $a
+     * @return bool
+     */
+    public function pathEq($indexes = [], $val = null, $a = null)
+    {
+        return f()->pathSatisfies(f()->equals($val), $indexes, $a);
     }
 }
