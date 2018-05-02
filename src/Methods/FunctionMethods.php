@@ -21,10 +21,10 @@ class FunctionMethods
     use MethodCollection;
 
     const ARITY = [
-        'true' => 1,
-        'T' => 1,
-        'false' => 1,
-        'F' => 1,
+        'true' => 0,
+        'T' => 0,
+        'false' => 0,
+        'F' => 0,
     ];
 
     const ALIAS = [

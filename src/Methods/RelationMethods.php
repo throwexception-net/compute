@@ -219,13 +219,13 @@ class RelationMethods
     }
 
     /**
-     * @param array|string $indexes $indexes
+     * @param array|string|\ArrayAccess $path
      * @param mixed $val
      * @param mixed $a
      * @return bool
      */
-    public function pathEq($indexes = [], $val = null, $a = null)
+    public function pathEq($path = [], $val = null, $a = null)
     {
-        return f()->pathSatisfies(f()->equals($val), $indexes, $a);
+        return f()->pathSatisfies(f()->equals($val), $path, $a);
     }
 }

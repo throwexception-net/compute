@@ -10,7 +10,8 @@ class ObjectMethods
     use MethodCollection;
 
     const ARITY = [
-        'path' => 2
+        'get' => 2,
+        'getOrUndef' => 2,
     ];
 
     protected function accessAndGet($turnExceptionToNull, $name, $a)

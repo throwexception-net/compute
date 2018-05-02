@@ -19,6 +19,9 @@ class ListMethods
 
     const ARITY = [
         'classify' => 2,
+        'offsetGet' => 2,
+        'offsetGetOrUndef' => 2,
+        'nth' => 2
     ];
 
     /**
@@ -41,7 +44,12 @@ class ListMethods
         return $result;
     }
 
-    public function nth($offset, $list)
+    /**
+     * @param mixed $offset
+     * @param array|string|\ArrayAccess $list
+     * @return mixed|null
+     */
+    public function nth($offset = null, $list = [])
     {
         if (!is_string($list)
             || !is_array($list)
@@ -55,6 +63,11 @@ class ListMethods
         return null;
     }
 
+    /**
+     * @param string $offset
+     * @param array $list
+     * @return mixed|null
+     */
     public function offsetGet($offset = '', $list = [])
     {
         if (is_array($list)

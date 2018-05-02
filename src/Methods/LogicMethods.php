@@ -3,6 +3,7 @@
 namespace ThrowExceptionNet\Compute\Methods;
 
 use ThrowExceptionNet\Compute\Exceptions\InvalidArgumentException;
+use ThrowExceptionNet\Compute\Exceptions\UndefinedException;
 use ThrowExceptionNet\Compute\Wrapper;
 use function ThrowExceptionNet\Compute\f;
 
@@ -290,24 +291,17 @@ class LogicMethods
 
     /**
      * @param callable $predicate
-     * @param array|string $indexes
+     * @param array|string $path
      * @param array|object|\ArrayAccess $a
      * @return bool
      */
-    public function pathSatisfies($predicate = null, $indexes = [], $a = null)
+    public function pathSatisfies($predicate = null, $path = [], $a = null)
     {
-        if (is_string($indexes)) {
-            $indexes = explode('.', $indexes);
+        try {
+            return $predicate(f()->path($path, $a));
+        } catch (UndefinedException $e) {
+            return false;
         }
-        /** @noinspection ForeachSourceInspection */
-        foreach ($indexes as $index) {
-            try {
-                $a = $this->accessAndGet($index, $a);
-            } catch (InvalidArgumentException $e) {
-                return false;
-            }
-        }
-        return $predicate($a);
     }
 
     /**
