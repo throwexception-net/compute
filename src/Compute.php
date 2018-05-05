@@ -132,4 +132,9 @@ class Compute
 
         return self::$methodCache[$name];
     }
+
+    public function __invoke($fn = null, $arity = null)
+    {
+        return f($fn, $arity);
+    }
 }

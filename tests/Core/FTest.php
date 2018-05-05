@@ -5,9 +5,8 @@ namespace ThrowExceptionNet\Compute\Tests\Core;
 use ThrowExceptionNet\Compute\Compute;
 use ThrowExceptionNet\Compute\Tests\Misc\MagicCall;
 use ThrowExceptionNet\Compute\Tests\TestCase;
+use function ThrowExceptionNet\Compute\_;
 use function ThrowExceptionNet\Compute\f;
-use function ThrowExceptionNet\Compute\f as _;
-use function ThrowExceptionNet\Compute\fr;
 use function ThrowExceptionNet\Compute\ref;
 
 class FTest extends TestCase
@@ -18,7 +17,6 @@ class FTest extends TestCase
     public function compute_is_singleton()
     {
         $this->assertEquals(f(), f());
-        $this->assertEquals(f(), fr());
         $this->assertEquals(f(), Compute::getInstance());
     }
 
@@ -182,9 +180,9 @@ class FTest extends TestCase
      */
     public function f_curry_right_should_work()
     {
-        $cr = fr(function ($a, $b, $c) {
+        $cr = f(function ($a, $b, $c) {
             return [$a, $b, $c];
-        });
+        }, null, true);
 
         $this->assertEquals([3, 2, 1], $cr(1, 2, 3));
         $this->assertEquals([3, 2, 1], $cr(1)->i(2)->i(3));
@@ -233,9 +231,9 @@ class FTest extends TestCase
      */
     public function f_curry_right_with_optional_parameter_should_work()
     {
-        $c = fr(function ($a, $b, $c = 3, $d = 4) {
+        $c = f(function ($a, $b, $c = 3, $d = 4) {
             return [$a, $b, $c, $d];
-        });
+        }, null, true);
 
         //实际给多少参数，翻转多少参数
         $this->assertEquals([2, 1, 3, 4], $c(1, 2));

@@ -149,7 +149,7 @@ class Wrapper
         }
     }
 
-    public function __construct($fn, $reverse = false, $arity = null)
+    public function __construct($fn, $arity = null, $reverse = false)
     {
         if ($fn instanceof self) {
             $this->initFrom($fn);
