@@ -81,6 +81,9 @@ class Wrapper implements HasArity
         if ($fn instanceof self) {
             $this->setState($fn, $arity, $reverse);
         } else {
+            if (is_string($fn) && strpos($fn, '::') !== false) {
+                $fn = explode('::', $fn);
+            }
             $this->arity = $arity === null ? getArity($fn) : $arity;
             $this->reverse = $reverse === true;
             $this->fn = $fn;
