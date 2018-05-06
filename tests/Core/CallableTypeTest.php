@@ -79,8 +79,15 @@ class CallableTypeTest extends TestCase
      * @param $args
      * @param $return
      */
-    public function callable_can_be_invoke_direct($callable, $args, $return)
+    public function callable_can_be_invoke_directly($callable, $args, $return)
     {
+        if (version_compare(PHP_VERSION, '7.0.0', '<')
+            && is_string($callable)
+            && strpos($callable, '::') !== false
+        ) {
+            $this->markTestSkipped('Can not invoke ' . $callable . ' directly below PHP 7.');
+            return;
+        }
         $this->assertEquals($return, $callable(...$args));
     }
 
