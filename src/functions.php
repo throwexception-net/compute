@@ -8,7 +8,7 @@ namespace ThrowExceptionNet\Compute;
  * @param bool|null $reverse
  * @return Compute|Wrapper
  */
-function f($fn = null, $arity = null, $reverse = null)
+function f(callable $fn = null, $arity = null, $reverse = null)
 {
     if ($fn === null) {
         return new Compute();
@@ -39,7 +39,7 @@ function ref(&$val)
  * @param callable $fn
  * @return bool|int false for unable to get arity
  */
-function getArity($fn)
+function getArity(callable $fn)
 {
     $isMethod = false;
 
@@ -72,7 +72,7 @@ function getArity($fn)
 
     if (is_array($fn)) {
         $isMethod = true;
-        if ($isMagic = _validateCallableArray($fn)) {
+        if (_usingMagicCall($fn)) {
             return false;
         }
     }
@@ -88,7 +88,7 @@ function getArity($fn)
  * @param array $fn
  * @return bool true if using magic __call Or __callStatic
  */
-function _validateCallableArray(array $fn)
+function _usingMagicCall(array $fn)
 {
     if (count($fn) !== 2) {
         throw new \InvalidArgumentException(

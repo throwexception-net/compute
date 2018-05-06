@@ -2,7 +2,9 @@
 
 namespace ThrowExceptionNet\Compute\Tests\Core;
 
-use ThrowExceptionNet\Compute\Tests\Misc\MagicCall;
+use ThrowExceptionNet\Compute\Tests\Misc\MagicClass;
+use ThrowExceptionNet\Compute\Tests\Misc\NormalClass;
+use ThrowExceptionNet\Compute\Tests\Misc\StaticMagicClass;
 use ThrowExceptionNet\Compute\Tests\TestCase;
 use function ThrowExceptionNet\Compute\_;
 use function ThrowExceptionNet\Compute\f;
@@ -43,8 +45,8 @@ class FTest extends TestCase
      */
     public function bindTo_callOn_should_work()
     {
-        $a = new MagicCall(1);
-        $b = new MagicCall(2);
+        $a = new NormalClass(1);
+        $b = new NormalClass(2);
 
         $c1 = f([$a, 'getValue']);
 
@@ -106,9 +108,9 @@ class FTest extends TestCase
     {
 
         $callables = [
-            f([new MagicCall, 'magic']),
-            f([MagicCall::class, 'magic']),
-            f(MagicCall::class . '::magic'),
+            f([new MagicClass(), 'magic']),
+            f([StaticMagicClass::class, 'magic']),
+            f(StaticMagicClass::class . '::magic'),
         ];
         foreach ($callables as $c) {
             $this->assertEquals('magic', $c());
@@ -117,8 +119,8 @@ class FTest extends TestCase
             $this->assertEquals('magic1,2', $c(_(), 2)->i(1));
         }
         $callables = [
-            f([new MagicCall, 'noMagic']),
-            f([MagicCall::class, 'staticNoMagic']),
+            f([new NormalClass, 'method']),
+            f([NormalClass::class, 'staticMethod']),
         ];
 
         foreach ($callables as $c) {

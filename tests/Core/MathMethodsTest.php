@@ -1,6 +1,6 @@
 <?php
 
-namespace Core;
+namespace ThrowExceptionNet\Compute\Tests\Core;
 
 use DivisionByZeroError;
 use PHPUnit_Framework_Error;

@@ -2,9 +2,7 @@
 
 namespace ThrowExceptionNet\Compute\Tests;
 
-use PHPUnit\Framework\TestCase as BaseTestCase;
-
-class TestCase extends BaseTestCase
+class TestCase extends \PHPUnit\Framework\TestCase
 {
 
 }

@@ -6,11 +6,6 @@ use ThrowExceptionNet\Compute\Exceptions\BadMethodCallException;
 
 class Wrapper implements HasArity
 {
-    /**
-     * @var int[]
-     */
-    protected static $arityCache = [];
-
     const PROPERTIES = [
         'fn',
         'arity',
@@ -76,7 +71,7 @@ class Wrapper implements HasArity
         $this->reverse = $reverse === null ? $wrapper->reverse : $reverse;
     }
 
-    public function __construct($fn, $arity = null, $reverse = null)
+    public function __construct(callable $fn, $arity = null, $reverse = null)
     {
         if ($fn instanceof self) {
             $this->setState($fn, $arity, $reverse);
