@@ -47,6 +47,7 @@ function getArity($fn)
         if ($fn instanceof HasArity) {
             return $fn->getArity();
         }
+        /** @noinspection MissingOrEmptyGroupStatementInspection */
         if ($fn instanceof \Closure) {
             //skip
         } elseif (method_exists($fn, '__invoke')) {
@@ -73,7 +74,7 @@ function getArity($fn)
         $isMethod = true;
         if ($isMagic = _validateCallableArray($fn)) {
             return false;
-        };
+        }
     }
 
     $refection = $isMethod
