@@ -24,8 +24,6 @@ use ThrowExceptionNet\Compute\Wrapper;
  */
 class MathMethods
 {
-    use MethodCollection;
-
     const ARITY = [
         'add' => 2,
         'compare' => 2,

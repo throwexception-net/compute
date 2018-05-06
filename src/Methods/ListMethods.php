@@ -15,8 +15,6 @@ use function ThrowExceptionNet\Compute\f;
  */
 class ListMethods
 {
-    use MethodCollection;
-
     const ARITY = [
         'classify' => 2,
         'offsetGet' => 2,

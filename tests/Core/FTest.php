@@ -2,7 +2,6 @@
 
 namespace ThrowExceptionNet\Compute\Tests\Core;
 
-use ThrowExceptionNet\Compute\Compute;
 use ThrowExceptionNet\Compute\Tests\Misc\MagicCall;
 use ThrowExceptionNet\Compute\Tests\TestCase;
 use function ThrowExceptionNet\Compute\_;
@@ -11,15 +10,6 @@ use function ThrowExceptionNet\Compute\ref;
 
 class FTest extends TestCase
 {
-    /**
-     * @test
-     */
-    public function compute_is_singleton()
-    {
-        $this->assertEquals(f(), f());
-        $this->assertEquals(f(), Compute::getInstance());
-    }
-
     /**
      * @test
      */

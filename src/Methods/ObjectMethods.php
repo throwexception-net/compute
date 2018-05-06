@@ -7,8 +7,6 @@ use ThrowExceptionNet\Compute\Exceptions\UndefinedException;
 
 class ObjectMethods
 {
-    use MethodCollection;
-
     const ARITY = [
         'get' => 2,
         'getOrUndef' => 2,

@@ -18,13 +18,12 @@ namespace ThrowExceptionNet\Compute\Methods;
  */
 class FunctionMethods
 {
-    use MethodCollection;
-
     const ARITY = [
         'true' => 0,
         'T' => 0,
         'false' => 0,
         'F' => 0,
+        'memoizeWith' => 2
     ];
 
     const ALIAS = [
@@ -40,5 +39,12 @@ class FunctionMethods
     public function false()
     {
         return false;
+    }
+
+    public function memoizeWith($toKey = null, $fn = null)
+    {
+        return function () {
+
+        };
     }
 }

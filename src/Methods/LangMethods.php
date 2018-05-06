@@ -7,8 +7,6 @@ use function ThrowExceptionNet\Compute\f;
 
 class LangMethods
 {
-    use MethodCollection;
-
     const ARITY = [
         'path' => 2
     ];

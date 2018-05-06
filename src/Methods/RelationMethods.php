@@ -7,8 +7,6 @@ use function ThrowExceptionNet\Compute\f;
 
 class RelationMethods
 {
-    use MethodCollection;
-
     const ARITY = [
         'clamp' => 3,
         'countBy' => 2,

@@ -28,63 +28,31 @@ use ThrowExceptionNet\Compute\Methods\UtilMethods;
  */
 class Compute
 {
-
-    const METHOD_CLASSES = [
-        ListMethods::class,
-        LangMethods::class,
-        StringMethods::class,
-        LogicMethods::class,
-        RelationMethods::class,
-        UtilMethods::class,
-        MathMethods::class,
-        DateMethods::class,
-        ObjectMethods::class
+    const METHODS_ARITY = [
+        ListMethods::class => ListMethods::ARITY,
+        LangMethods::class => LangMethods::ARITY,
+        StringMethods::class => StringMethods::ARITY,
+        LogicMethods::class => LogicMethods::ARITY,
+        RelationMethods::class => RelationMethods::ARITY,
+        UtilMethods::class => UtilMethods::ARITY,
+        MathMethods::class => MathMethods::ARITY,
+        DateMethods::class => DateMethods::ARITY,
+        ObjectMethods::class => ObjectMethods::ARITY,
     ];
 
-    /**
-     * @var null|Compute
-     */
-    protected static $instance = null;
-
-    /**
-     * @var Wrapper[]
-     */
-    protected static $methodCache = [];
-
-    protected function __construct()
+    public static function getClassOfMethod($name)
     {
-    }
-
-    protected function __clone()
-    {
-    }
-
-    /**
-     * @return Compute
-     */
-    public static function getInstance()
-    {
-        if (self::$instance === null) {
-            self::$instance = new self;
-        }
-
-        return static::$instance;
-    }
-
-    public static function isMe()
-    {
-        $n = func_num_args();
-        if ($n === 1) {
-            return func_get_arg(0) === self::$instance;
-        }
-
-        $anythings = func_get_args();
-        foreach ($anythings as $thing) {
-            if ($thing === self::$instance) {
-                return true;
+        foreach (self::METHODS_ARITY as $class => $arity) {
+            if (isset($arity[$name])) {
+                return $class;
             }
         }
         return false;
+    }
+
+    public static function isMe($object)
+    {
+        return is_object($object) && func_get_arg(0) instanceof self;
     }
 
     public function __call($name, $args)
@@ -98,9 +66,6 @@ class Compute
 
     public function __get($name)
     {
-        if (!isset($this->$name)) {
-            throw new BadMethodCallException('Method ' . $name . ' is non-exists');
-        }
         return $this->getMethod($name);
     }
 
@@ -111,30 +76,29 @@ class Compute
 
     public function __isset($name)
     {
-        return $this->getMethod($name) !== false;
+        return (bool) self::getClassOfMethod($name);
     }
 
     protected function getMethod($name)
     {
-        if (!isset(self::$methodCache[$name])) {
-            $m = false;
-            foreach (self::METHOD_CLASSES as $class) {
-                $m = $class::getMethod($name);
-                if ($m !== false) {
-                    self::$methodCache[$name] = $m;
-                    break;
-                }
-            }
-            if ($m === false) {
-                return false;
+        $class = self::getClassOfMethod($name);
+        if ($class === false) {
+            throw new BadMethodCallException('Method ' . $name . ' is non-exists');
+        }
+
+        if (defined($class . '::ALIAS')) {
+            $ALIAS = $class::ALIAS;
+            if (isset($ALIAS[$name])) {
+                $name = $class::ALIAS[$name];
             }
         }
 
-        return self::$methodCache[$name];
+        $arity = self::METHODS_ARITY[$class][$name];
+        return f([new $class, $name], $arity);
     }
 
-    public function __invoke($fn = null, $arity = null)
+    public function __invoke($fn = null, $arity = null, $reverse = null)
     {
-        return f($fn, $arity);
+        return f($fn, $arity, $reverse);
     }
 }

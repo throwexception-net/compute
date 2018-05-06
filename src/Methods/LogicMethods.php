@@ -66,8 +66,6 @@ use function ThrowExceptionNet\Compute\f;
  */
 class LogicMethods
 {
-    use MethodCollection;
-
     const ALIAS = [
         'and' => 'et',
         'or' => 'ou',
