@@ -13,7 +13,7 @@ class LangMethods
 
     /**
      * @param array|string|\Traversable $path
-     * @param null $a
+     * @param null|array|\ArrayAccess $a
      * @return mixed|null
      * @throws UndefinedException
      */

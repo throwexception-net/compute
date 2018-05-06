@@ -40,11 +40,4 @@ class FunctionMethods
     {
         return false;
     }
-
-    public function memoizeWith($toKey = null, $fn = null)
-    {
-        return function () {
-
-        };
-    }
 }
