@@ -97,7 +97,7 @@ class Compute
         return f([new $class, $name], $arity);
     }
 
-    public function __invoke($fn = null, $arity = null, $reverse = null)
+    public function __invoke(callable $fn = null, $arity = null, $reverse = null)
     {
         return f($fn, $arity, $reverse);
     }
