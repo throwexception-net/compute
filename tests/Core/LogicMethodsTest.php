@@ -77,5 +77,41 @@ class LogicMethodsTest extends TestCase
      */
     public function both_should_work()
     {
+        $even = function ($x) {
+            return $x % 2 === 0;
+        };
+        $gt10 = function ($x) {
+            return $x > 10;
+        };
+
+        $c = f()->both($even, $gt10);
+        $this->assertFalse($c(8));
+        $this->assertFalse($c(11));
+        $this->assertTrue($c(12));
+
+        $between = function ($a, $b, $c) {
+            return $a < $b && $b < $c;
+        };
+
+        $total20 = function ($a, $b, $c) {
+            return ($a + $b + $c) === 20;
+        };
+
+        $c = f()->both($between, $total20);
+
+        $this->assertTrue($c(4, 5, 11));
+        $this->assertFalse($c(12, 2, 6));
+        $this->assertFalse($c(5, 6, 15));
+        $this->assertFalse($c(5)->i(6)->i(15));
+
+        $a = f()->false;
+        $x = 'not evaluated';
+
+        $b = function () use (&$x) {
+            $x = 'got evaluated';
+        };
+
+        f()->both($a, $b)->i();
+        $this->assertEquals('not evaluated', $x);
     }
 }

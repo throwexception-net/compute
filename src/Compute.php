@@ -4,6 +4,7 @@ namespace ThrowExceptionNet\Compute;
 
 use ThrowExceptionNet\Compute\Exceptions\BadMethodCallException;
 use ThrowExceptionNet\Compute\Methods\DateMethods;
+use ThrowExceptionNet\Compute\Methods\FunctionMethods;
 use ThrowExceptionNet\Compute\Methods\LangMethods;
 use ThrowExceptionNet\Compute\Methods\ListMethods;
 use ThrowExceptionNet\Compute\Methods\LogicMethods;
@@ -25,6 +26,7 @@ use ThrowExceptionNet\Compute\Methods\UtilMethods;
  * @mixin MathMethods
  * @mixin DateMethods
  * @mixin ObjectMethods
+ * @mixin FunctionMethods
  */
 class Compute
 {
@@ -38,6 +40,7 @@ class Compute
         MathMethods::class => MathMethods::ARITY,
         DateMethods::class => DateMethods::ARITY,
         ObjectMethods::class => ObjectMethods::ARITY,
+        FunctionMethods::class => FunctionMethods::ARITY,
     ];
 
     public static function getClassOfMethod($name)

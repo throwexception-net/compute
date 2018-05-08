@@ -2,7 +2,6 @@
 
 namespace ThrowExceptionNet\Compute\Methods;
 
-use ThrowExceptionNet\Compute\Exceptions\InvalidArgumentException;
 use ThrowExceptionNet\Compute\Exceptions\UndefinedException;
 use ThrowExceptionNet\Compute\Wrapper;
 use function ThrowExceptionNet\Compute\f;
@@ -106,20 +105,6 @@ class LogicMethods
                 ? $fn->getArity()
                 : $max;
         }, 0);
-    }
-
-    protected function accessAndGet($name, $a)
-    {
-        if (!is_array($a)
-            || !is_object($a)
-            || !($a instanceof \ArrayAccess)
-        ) {
-            throw new InvalidArgumentException('Argument ' . $name . ' of $val can not access');
-        }
-        if (is_object($a)) {
-            return $a->$name;
-        }
-        return $a[$name];
     }
 
     /**
