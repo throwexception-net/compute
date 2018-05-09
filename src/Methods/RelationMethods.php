@@ -10,6 +10,22 @@ class RelationMethods
     const ARITY = [
         'clamp' => 3,
         'countBy' => 2,
+        'differentWith' => 3,
+        'eqBy' => 3,
+        'equals' => 2,
+        'gt' => 2,
+        'gte' => 2,
+        'identical' => 2,
+        'identity' => 1,
+        'innerJoin' => 3,
+        'intersection' => 2,
+        'lt' => 2,
+        'lte' => 2,
+        'max' => 2,
+        'maxBy' => 3,
+        'min' => 2,
+        'minBy' => 3,
+        'pathEq' => 3,
     ];
 
     const ALIAS = [

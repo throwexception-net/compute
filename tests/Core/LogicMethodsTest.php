@@ -114,4 +114,39 @@ class LogicMethodsTest extends TestCase
         f()->both($a, $b)->i();
         $this->assertEquals('not evaluated', $x);
     }
+
+    /**
+     * @test
+     */
+    public function complement_should_work()
+    {
+        $even = function ($a) {
+            return $a % 2 === 0;
+        };
+        $c = f()->complement($even);
+        $this->assertFalse($c(10));
+        $this->assertTrue($c(11));
+
+        $between = function ($a, $b, $c) {
+            return $a < $b && $b < $c;
+        };
+        $c = f()->complement($between);
+        $this->assertFalse($c(4, 5, 11));
+        $this->assertTrue($c(12, 2, 6));
+    }
+
+    /**
+     * @test
+     */
+    public function cond_should_work()
+    {
+        $c = f()->cond([
+            [f()->equals(0), f()->always('0')],
+            [f()->equals(100), f()->always('100')],
+            [f()->true, f()->always('default')]
+        ]);
+        $this->assertEquals('0', $c(0));
+        $this->assertEquals('100', $c(100));
+        $this->assertEquals('default', $c(12345));
+    }
 }

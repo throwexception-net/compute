@@ -55,7 +55,7 @@ class Compute
 
     public static function isMe($object)
     {
-        return is_object($object) && func_get_arg(0) instanceof self;
+        return is_object($object) && $object instanceof self;
     }
 
     public function __call($name, $args)
@@ -90,8 +90,8 @@ class Compute
         }
 
         if (defined($class . '::ALIAS')) {
-            $ALIAS = $class::ALIAS;
-            if (isset($ALIAS[$name])) {
+            $alias = $class::ALIAS;
+            if (isset($alias[$name])) {
                 $name = $class::ALIAS[$name];
             }
         }

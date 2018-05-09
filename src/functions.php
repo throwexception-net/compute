@@ -42,10 +42,6 @@ function ref(&$val)
  */
 function getArity(callable $fn)
 {
-    if (is_string($fn) && strpos($fn, '::') !== false) {
-        $fn = explode('::', $fn, 2);
-    }
-
     if (is_object($fn)) {
         if ($fn instanceof HasArity) {
             return $fn->getArity();
@@ -53,6 +49,10 @@ function getArity(callable $fn)
         if (!($fn instanceof \Closure)) {
             $fn = [$fn, '__invoke'];
         }
+    }
+
+    if (is_string($fn) && strpos($fn, '::') !== false) {
+        $fn = explode('::', $fn, 2);
     }
 
     //magic call

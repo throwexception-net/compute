@@ -19,6 +19,7 @@ namespace ThrowExceptionNet\Compute\Methods;
 class FunctionMethods
 {
     const ARITY = [
+        'always' => 1,
         'true' => 0,
         'T' => 0,
         'false' => 0,
@@ -39,5 +40,16 @@ class FunctionMethods
     public function false()
     {
         return false;
+    }
+
+    /**
+     * @param $val
+     * @return \Closure
+     */
+    public function always($val = 0)
+    {
+        return function () use ($val) {
+            return $val;
+        };
     }
 }

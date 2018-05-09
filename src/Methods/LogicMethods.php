@@ -3,6 +3,7 @@
 namespace ThrowExceptionNet\Compute\Methods;
 
 use ThrowExceptionNet\Compute\Exceptions\UndefinedException;
+use ThrowExceptionNet\Compute\HasArity;
 use ThrowExceptionNet\Compute\Wrapper;
 use function ThrowExceptionNet\Compute\f;
 
@@ -98,7 +99,7 @@ class LogicMethods
     protected function getMaxArityFromFns($fns = [])
     {
         return array_reduce($fns, function ($max, $fn) {
-            if (!($fn instanceof Wrapper)) {
+            if (!($fn instanceof HasArity)) {
                 $fn = f($fn);
             }
             return $fn->getArity() > $max

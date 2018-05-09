@@ -6,13 +6,6 @@ use ThrowExceptionNet\Compute\Exceptions\BadMethodCallException;
 
 class Wrapper implements HasArity
 {
-    const PROPERTIES = [
-        'fn',
-        'arity',
-        'reverse',
-        'args',
-    ];
-
     /**
      * @var callable
      */
@@ -23,6 +16,11 @@ class Wrapper implements HasArity
      */
     protected $arity;
 
+    /**
+     * @var integer|null|false;
+     */
+    protected $fnArity = null;
+
     protected $reverse = true;
 
     protected $args = [];
@@ -32,6 +30,15 @@ class Wrapper implements HasArity
      */
     public function getArity()
     {
+        if (!$this->fnArity) {
+            return 0;
+        }
+        if ($this->arity === null) {
+            $k = array_reduce($this->args, function ($validNum, $arg) {
+                return Compute::isMe($arg) ? $validNum : $validNum - 1;
+            }, $this->fnArity);
+            $this->arity = $k > 0 ? $k : 0;
+        }
         return $this->arity;
     }
 
@@ -67,7 +74,8 @@ class Wrapper implements HasArity
     {
         $this->fn = $wrapper->fn;
         $this->args = $wrapper->args;
-        $this->arity = $arity === null ? $wrapper->arity : $arity;
+        $this->fnArity = $arity === null ? $wrapper->fnArity : $arity;
+        $this->arity = null;
         $this->reverse = $reverse === null ? $wrapper->reverse : $reverse;
     }
 
@@ -79,7 +87,7 @@ class Wrapper implements HasArity
             if (is_string($fn) && strpos($fn, '::') !== false) {
                 $fn = explode('::', $fn);
             }
-            $this->arity = $arity === null ? getArity($fn) : $arity;
+            $this->fnArity = $arity === null ? getArity($fn) : $arity;
             $this->reverse = $reverse === true;
             $this->fn = $fn;
         }
@@ -93,7 +101,7 @@ class Wrapper implements HasArity
     {
         list($merged, $k, $hasRefArg) = $this->getMergedArgs($args);
 
-        $arity = $this->getArity() === false ? 0 : $this->getArity();
+        $arity = $this->fnArity === false ? 0 : $this->fnArity;
 
         if ($k < $arity || count($merged) > $k) {
             return $this->clones($merged);
