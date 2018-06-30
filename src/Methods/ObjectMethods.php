@@ -10,7 +10,18 @@ class ObjectMethods
     const ARITY = [
         'get' => 2,
         'getOrUndef' => 2,
+        'prop' => 2
     ];
+
+    /**
+     * @param string $name
+     * @param object|array $a
+     * @return mixed
+     */
+    public function prop($name = '', $a = null)
+    {
+        return $this->accessAndGet(true, $name, $a);
+    }
 
     protected function accessAndGet($turnExceptionToNull, $name, $a)
     {

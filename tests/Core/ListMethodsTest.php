@@ -5,7 +5,7 @@ namespace ThrowExceptionNet\Compute\Tests\Core;
 use ThrowExceptionNet\Compute\Tests\TestCase;
 use function ThrowExceptionNet\Compute\f;
 
-class ArrayMethodsTest extends TestCase
+class ListMethodsTest extends TestCase
 {
     /**
      * @test

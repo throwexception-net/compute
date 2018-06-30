@@ -2,6 +2,8 @@
 
 namespace ThrowExceptionNet\Compute\Methods;
 
+use function ThrowExceptionNet\Compute\f;
+
 /**
  * Class FunctionMethods
  * @package ThrowExceptionNet\Compute\Methods
@@ -20,11 +22,12 @@ class FunctionMethods
 {
     const ARITY = [
         'always' => 1,
+        'apply' => 2,
         'true' => 0,
         'T' => 0,
         'false' => 0,
         'F' => 0,
-        'memoizeWith' => 2
+        'memoizeWith' => 2,
     ];
 
     const ALIAS = [
@@ -51,5 +54,10 @@ class FunctionMethods
         return function () use ($val) {
             return $val;
         };
+    }
+
+    public function apply(callable $fn = null, $args = [])
+    {
+        return $fn(...$args);
     }
 }
