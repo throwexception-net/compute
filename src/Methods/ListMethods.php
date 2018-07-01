@@ -4,6 +4,7 @@ namespace ThrowExceptionNet\Compute\Methods;
 
 use ThrowExceptionNet\Compute\Exceptions\InvalidArgumentException;
 use ThrowExceptionNet\Compute\Exceptions\UndefinedException;
+use ThrowExceptionNet\Compute\StringIterator;
 use ThrowExceptionNet\Compute\Wrapper;
 use function ThrowExceptionNet\Compute\f;
 
@@ -129,21 +130,22 @@ class ListMethods
 
         $result = [];
 
-        if ($list instanceof \Traversable) {
-            foreach ($list as $key => $item) {
-                $result[$key] = $fn($item);
+        if (!($list instanceof \Traversable)) {
+            if (is_string($list)) {
+                $list = new StringIterator($list);
+            } elseif (is_object($list)) {
+                $list = new \ArrayIterator($list);
+            } else {
+                throw new \InvalidArgumentException(
+                    'Argument $list must be one of array, object or implements \Traversable'
+                );
             }
-            return $list;
         }
 
-        if (is_object($list)) {
-            foreach (get_object_vars($list) as $prop) {
-                $result[$prop] = $fn($list->$prop);
-            }
-            return $result;
+        foreach ($list as $key => $item) {
+            $result[$key] = $fn($item);
         }
-
-        throw new \InvalidArgumentException('Argument $list must be one of array, object or implements \Traversable');
+        return $result;
     }
 
     /**
@@ -158,21 +160,22 @@ class ListMethods
             return array_reduce($list, $fn, $acc);
         }
 
-        if ($list instanceof \Traversable) {
-            foreach ($list as $item) {
-                $acc = $fn($acc, $item);
+        if (!($list instanceof \Traversable)) {
+            if (is_string($list)) {
+                $list = new StringIterator($list);
+            } elseif (is_object($list)) {
+                $list = new \ArrayIterator($list);
+            } else {
+                throw new \InvalidArgumentException(
+                    'Argument $list must be one of array, object or implements \Traversable'
+                );
             }
-            return $acc;
         }
 
-        if (is_object($list)) {
-            foreach (get_object_vars($list) as $prop) {
-                $acc = $fn($acc, $list->$prop);
-            }
-            return $acc;
+        foreach ($list as $key => $item) {
+            $acc = $fn($acc, $item);
         }
-
-        throw new \InvalidArgumentException('Argument $list must be one of array, object or Traversable');
+        return $acc;
     }
 
     /**
