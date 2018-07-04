@@ -82,6 +82,9 @@ class ListMethodsTest extends TestCase
         ], $mapAppendString($o));
     }
 
+    /**
+     * @test
+     */
     public function map_a_string_should_get_an_array()
     {
         $mapAppendString = f()->map(function ($str) {

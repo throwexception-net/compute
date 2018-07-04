@@ -2,7 +2,7 @@
 
 namespace ThrowExceptionNet\Compute;
 
-class StringIterator implements \Iterator
+class StringIterator implements \SeekableIterator, \Countable
 {
     /**
      * @var string
@@ -17,7 +17,7 @@ class StringIterator implements \Iterator
     /**
      * @var int
      */
-    private $index = 0;
+    private $position = 0;
 
     /**
      * StringIterator constructor.
@@ -34,7 +34,7 @@ class StringIterator implements \Iterator
      */
     public function current()
     {
-        return $this->string[$this->index];
+        return $this->string[$this->position];
     }
 
     /**
@@ -42,7 +42,7 @@ class StringIterator implements \Iterator
      */
     public function next()
     {
-        $this->index++;
+        $this->position++;
     }
 
     /**
@@ -50,7 +50,7 @@ class StringIterator implements \Iterator
      */
     public function key()
     {
-        return $this->index < $this->length ? $this->index : null;
+        return $this->position < $this->length ? $this->position : null;
     }
 
     /**
@@ -58,7 +58,7 @@ class StringIterator implements \Iterator
      */
     public function valid()
     {
-        return $this->index < $this->length;
+        return $this->position < $this->length;
     }
 
     /**
@@ -66,6 +66,22 @@ class StringIterator implements \Iterator
      */
     public function rewind()
     {
-        $this->index = 0;
+        $this->position = 0;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function count()
+    {
+        return $this->length;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function seek($position)
+    {
+        $this->position = $position;
     }
 }
